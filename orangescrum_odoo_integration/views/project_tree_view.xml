@@ -1,0 +1,15 @@
+<odoo>
+    <record id="custom_project_tree_inherit" model="ir.ui.view">
+        <field name="name">custom.project.project.tree</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project"/><!--view_project   project_list_view_group_stage-->
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="start_date"/>
+                <field name="practice"/>
+                <field name="end_date"/>
+                <field name="status_color" widget="html" string="Status Color"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_task_tree_custom_inherit" model="ir.ui.view">
+        <field name="name">project.task.tree.custom.labels</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_tree2"/>
+        <field name="arch" type="xml">
+            <!-- Change "Title" to "Task" -->
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="string">Task</attribute>
+            </xpath>
+
+            <!-- Change "Project" to "Project name" -->
+            <xpath expr="//field[@name='project_id']" position="attributes">
+                <attribute name="string">Project Name</attribute>
+            </xpath>
+
+            <!-- Change "Tags" to "Practise" -->
+            <xpath expr="//field[@name='tag_ids']" position="attributes">
+                <attribute name="string">Practice</attribute>
+            </xpath>
+
+            <!-- Change "Stage" to "Status" -->
+            <xpath expr="//field[@name='stage_id']" position="attributes">
+                <attribute name="string">Status</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='priority']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_task_form" model="ir.ui.view">
+        <field name="name">project.task.form.custom</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <!--Add Custom fields which are not in orange scrum -->
+            <xpath expr="//group/group/field[@name='partner_id']" position="after">
+                <field name="priority_level"/>
+                <field name="review_required"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="spent_time"/>
+            </xpath>
+            <xpath expr="//group/group/field[@name='tag_ids']" position="after">
+                <field name="internal_verification_on"/>
+                <field name="verified_by"/>
+                <field name="customer_verification_on"/>
+                <field name="confirmed_by"/>
+            </xpath>
+            <xpath expr="//field[@name='priority']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

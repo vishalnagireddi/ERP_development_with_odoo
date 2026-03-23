@@ -1,0 +1,41 @@
+<odoo>
+    <record id="custom_project_tree_inherit" model="ir.ui.view">
+        <field name="name">custom.project.project.tree</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.project_list_view_group_stage"/>
+        <field name="arch" type="xml">
+
+            <!-- Rename 'name' to 'Project Name' -->
+            <xpath expr="//field[@name='display_name']" position="attributes">
+                <attribute name="string">Project Name</attribute>
+            </xpath>
+
+            <!-- Rename 'partner_id' to 'Customer Name' -->
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="string">Customer Name</attribute>
+            </xpath>
+
+
+            <!-- Rename 'tag_ids' to 'Practice' -->
+            <xpath expr="//field[@name='tag_ids']" position="attributes">
+                <attribute name="string">Practice</attribute>
+            </xpath>
+
+
+            <!-- Reorder remaining fields -->
+              <xpath expr="//field[@name='partner_id']" position="after">-->
+                <field name="sale_line_id" string="Sales Order Item"/>
+                <field name="sale_line_id" optional="show"/>
+<!---->
+                <field name="start_date"/>
+                <field name="end_date"/>
+             </xpath>
+
+             <xpath expr="//field[@name='tag_ids']" position="after">
+                  <field name="status_color" widget="html" string="Status Color"/>
+                <field name="head_count" string="Head Count"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

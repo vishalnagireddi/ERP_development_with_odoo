@@ -1,0 +1,28 @@
+<odoo>
+    <record id="view_task_tree_custom_inherit" model="ir.ui.view">
+        <field name="name">project.task.tree.custom.labels</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_tree2"/>
+        <field name="arch" type="xml">
+            <!-- Change "Title" to "Task" -->
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="string">Task</attribute>
+            </xpath>
+
+            <!-- Change "Project" to "Project name" -->
+            <xpath expr="//field[@name='project_id']" position="attributes">
+                <attribute name="string">Project Name</attribute>
+            </xpath>
+
+            <!-- Change "Tags" to "Practise" -->
+            <xpath expr="//field[@name='tag_ids']" position="attributes">
+                <attribute name="string">Practice</attribute>
+            </xpath>
+
+            <!-- Change "Stage" to "Status" -->
+            <xpath expr="//field[@name='stage_id']" position="attributes">
+                <attribute name="string">Status</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,69 @@
+<odoo>
+    <!-- ✅ 1. Restrict kanban view default_group_by for salesperson -->
+    <record id="crm_case_kanban_view_leads_inherit_salesperson" model="ir.ui.view">
+        <field name="name">crm.lead.kanban.restrict.salesperson</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="default_group_by" groups="crm_security.group_crm_sales_person_user_5">stage_id</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ✅ 2. Custom Action: My Pipeline (Restricted) for Salesperson -->
+    <record id="action_crm_pipeline_restricted_salesperson" model="ir.actions.act_window">
+        <field name="name">My Pipeline (Restricted)</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('stage_id.name', 'in', ['Suspect', 'Prospect'])]</field>
+        <field name="context">{'search_default_my_leads': 1}</field>
+        <field name="groups_id" eval="[(4, ref('crm_security.group_crm_sales_person_user_5'))]"/>
+    </record>
+
+    <!-- ✅ 3. Add menu under Sales tab for Salesperson only -->
+    <menuitem id="menu_crm_pipeline_salesperson_custom"
+              name="My Pipeline"
+              parent="crm.crm_menu_sales"
+              action="action_crm_pipeline_restricted_salesperson"
+              sequence="1"/>
+<!--              groups="crm_security.group_crm_sales_person_user_5"/>-->
+</odoo>
+
+
+<!--<odoo>-->
+<!--    &lt;!&ndash; Kanban view inheritance limited only to sales person group &ndash;&gt;-->
+<!--    <odoo>-->
+<!--        <record id="crm_case_kanban_view_leads_inherit_sales_person" model="ir.ui.view">-->
+<!--            <field name="name">crm.lead.kanban.restrict.sales.person</field>-->
+<!--            <field name="model">crm.lead</field>-->
+<!--            <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//kanban" position="attributes">-->
+<!--                    <attribute name="default_group_by" groups="crm_security.group_crm_sales_person_user_5">stage_id</attribute>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--    </odoo>-->
+
+<!--    &lt;!&ndash; Action and menu for Sales Person group only &ndash;&gt;-->
+<!--    <record id="action_crm_lead_pipeline_sales_person" model="ir.actions.act_window">-->
+<!--        <field name="name">My Pipeline (Restricted)</field>-->
+<!--        <field name="res_model">crm.lead</field>-->
+<!--        <field name="view_mode">kanban,tree,form</field>-->
+<!--        <field name="domain">[('stage_id.name', 'in', ['Suspect', 'Prospect'])]</field>-->
+<!--        <field name="context">{'search_default_my_leads': 1}</field>-->
+<!--        <field name="groups_id" eval="[(4, ref('crm_security.group_crm_sales_person_user_5'))]"/>-->
+<!--    </record>-->
+
+
+<!--    <menuitem id="menu_crm_pipeline_sales_person"-->
+<!--              name="My Pipeline"-->
+<!--              parent="crm.crm_menu_root"-->
+<!--              action="action_crm_lead_pipeline_sales_person"-->
+<!--              sequence="5"-->
+<!--              groups="crm_security.group_crm_sales_person_user_5"/>-->
+<!--    -->
+
+
+<!--</odoo>-->

@@ -1,0 +1,19 @@
+<odoo>
+    <template id="suspect_prospect_ratio_block" inherit_id="crm_dashboard.dashboard_template" name="Suspect to Prospect Ratio Block">
+        <xpath expr="//section[@id='main_section_manager']//div[contains(@class, 'row')]" position="inside">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="o_dash_widget lead_ratio">
+                    <div class="d-flex align-items-center">
+                        <div class="o_dash_icon text-purple">
+                            <i class="fa fa-random fa-2x"/>
+                        </div>
+                        <div class="ms-3">
+                            <h4 class="fw-bold suspect-prospect-ratio">0.0</h4>
+                            <span>Suspect to Prospect Ratio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
